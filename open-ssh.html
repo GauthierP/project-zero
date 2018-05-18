@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+   
+    <head>
+        <title>SSH and Windows 10</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="styles/style-main.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" href="images/icon.ico">
+    </head>
+
+    <body>
+        <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+        <div class="header">
+                <h1>Installer OpenSSH sur windows 10</h1>
+                <p>créé par <img src="images/profil.png" class="profil" alt="avatar"></p>
+        </div> 
+
+        
+        <div class="navbar">
+            <a href="index.html"><i class="fa fa-home"></i> Accueil</a>
+            <div class="dropdown">
+                <button class="dropbtn">Articles
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="open-ssh.html">Open SSH sur Windows 10 (FR)</a>
+                    <a href="teardown.html">Embrace teardown (EN)</a>
+
+                </div>
+            </div>
+            <a href="galerie.html">Galerie</a>
+            <a href="about.html" class="right">À propos</a>
+        </div>
+
+        
+        <div class="main">
+            <div class="content">
+                <h1>Installer openSSH sur Windows 10</h1>
+                <p> 
+                    Ce document a deux objectifs distincts : 
+                    <ol>
+                        <li>D'une façon indirecte, me permettre d'affiner et de mettre en pratique mes compétences en programmation web (HTML, CSS, JavaScript).</li>
+                        <li>Et, dans ce cas précis, permettre au lecteur d'installer openSSH sans avoir à passer par des applications tierces 
+                            telles que <a href="https://www.putty.org/">PuTTY</a>.</li>
+                    </ol>
+                </p>
+                <p>
+                    Il est rédigé en parallèle de mon apprentissage des technologies du web, que je réalise à l'aide d'un certain nombre de tutoriels et didacticiels, 
+                    notamment ceux de <a href="https://developer.mozilla.org/fr/docs/Web">Mozilla.org</a>.
+                </p>
+            
+                <h2>Contexte</h2>
+                <p>Le protocole SSH (Secure SHell) permet une connexion distante et sécurisée à un serveur. Jusqu'à très récemment, les utilisateurs de Windows devaient 
+                    passer par une application tierce comme PuTTY pour pouvoir établir une connexion en SSH, contrairement aux utilisateurs de MacOS ou Linux, qui peuvent 
+                    le lancer directement via la ligne de commande.</p>
+            
+                <h3>Le chiffrement des échanges avec SSH</h3>
+                <p>
+                    Sans rentrer dans les détails des algorithmes de chiffrement, ce qui n'est pas le sujet ici, on parlera tout de même de deux grandes catégories : les 
+                    chiffrements <em>symétriques</em> et <em>asymétriques</em>. Je recommande la lecture du didacticiel 
+                    <a href="https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/la-connexion-securisee-a-distance-avec-ssh">suivant</a>, sur lequel on 
+                    s'appuyera plus que largement dans ce paragraphe.    
+                </p>
+                <h4>Le chiffrement symétrique</h4>
+                <P>Le chiffrement symétrique est la méthode de chiffrement la plus simple. Avec cette méthode, on utilise la même clé pour chiffrer et déchiffrer un message.
+                    Il faut donc que la personne qui chiffre et celle qui déchiffre connaissent toutes les deux la clé.
+                </P>
+                <p>La difficulté de ce schéma est de trouver un moyen de s'échanger la clé. Elle ne peut en effet pas être échangée en clair, car une personne interceptant la clé pourrait 
+                    alors déchiffrer tous les messages suivant. La solution pour contourner cette impasse est de chiffrer la clé de chiffrement lors de son envoi. On arrive alors à la méthode 
+                    du chiffrement asymétrique.
+                <h4>Le chiffrement asymétrique</h4>
+                <P>Le chiffrement asymétrique utilise une clé pour chiffrer et une autre pour déchiffrer.</P>
+                <P>Il y a donc deux clés:</P>
+                <ul>
+                    <li>une clé dite "<strong>publique</strong>" qui sert à <strong>chiffrer.</strong></li>
+                    <li>une clé dite "<strong>privée</strong>" qui sert à <strong>déchiffrer.</strong></li>
+                </ul>
+                <p>
+                    La clé publique ne sert qu'à chiffrer. Avec ce type d'algorithme, on ne peut déchiffrer un message que si l'on connait la clé privée.
+                </p>
+                <p>
+                    Dans un premier temps, on demande à l'ordinateur de générer une paire de clés : une privée et une publique.
+                    La clé publique est envoyée à l'autre machine souhaitant communiquer avec l'ordinateur, pour que celle-ci puisse chiffrer ses messages à l'aide de la clé publique. La clé privée
+                    est gardé secrète par l'ordinateur pour pouvoir déchiffrer tous les messages chiffrés avec la clé publique qu'il recevra de l'autre ordinateur.
+                </p>
+                <P>On dit donc que ce chiffrement est asymétrique car il faut deux clés différentes. L'une permet de chiffrer le message, l'autre de le déchiffrer.</P>
+                <P>La clé publique peut être transmise en clair sur le réseau, ce n'est pas grave si un pirate l'intercepte, puisqu'elle ne sert qu'à chiffrer (et non déchiffrer). En revanche
+                    la clé privée qui permet de déchiffrer doit rester secrète.
+                </P>
+                <p>L'algorithme de chiffrement asymétrique le plus connu s'appelle RSA (pour Rivest, Shamir et Adleman, du noms  de ses trois inventeurs). </p>
+            
+                <h4>Dans le cas du SSH</h4>
+                <P>
+                    SSH utilise les deux chiffrements: asymétrique et symétrique. Cela fonctionne dans cet ordre :
+                </P>
+                <ol>
+                    <li>Les deux machines souhaitant communiquer utilisent d'abord le chiffrement asymétrique pour s'échanger une clé de chiffrement symétrique.</li>
+                    <li>Pour le reste des échanges, le chiffrement symétrique est utilisé.</li>
+                </ol>
+                <P>
+                    Cette méthode de double chiffrement est utilisée car le chiffrement asymétrique a un défaut : il demande beaucoup trop de ressources au processeur. Le chiffrement asymétrique est 100 
+                    à 1000 fois plus lent que le chiffrement symétrique. <br>
+                    <strong>Le chiffrement asymétrique est donc utilisé seulement au début de la communication</strong>, afin que les machines s'échangent la clé de chiffrement symétrique de manière 
+                    sécurisée.
+                </P>
+                <P>On a donc la procédure suivante:</P>
+                <ol>
+                    <li>La première machine génère une clé publique et une clé privée (chiffrement asymétrique).</li>
+                    <li>La clé publique est envoyée à l'autre machine.</li>
+                    <li>Cette autre machine génére une clé symétrique, la chiffre au moyen de la clé publique puis l'envoi à la première machine.</li>
+                    <li>La première machine déchiffre le message avec sa clé privée et obtient donc la clé de chiffrement symétrique.</li>
+                    <li>Tous les échanges suivants entre les deux machines se font à laide de la clé de chiffrement symétrique qu'elles se sont échangée.</li>
+                </ol>
+                <h2>Installer OpenSSH sur Windows 10</h2>
+                <p>
+                    <ol>
+                        <li>Se rendre dans les paramètres de Windows, et plus spécifiquement dans la section <strong>"Applications" </strong><br>
+                            <img src="images/openSSH/parametresWindows.PNG"  class="image" alt="paramètres Windows 10">
+                        </li>
+                        <li>Dans la section <strong>"Applications et fonctionnalités"</strong>, cliquer sur <strong>"Gérer les fonctionnalités facultatives"</strong> pour 
+                            accéder au panneau des fonctionnalités optionnelles <br>
+                            <img src="images/openSSH/appsAndFeatures.PNG"  class="image" alt="applications et fonctionnalités">
+                        </li>
+                        <li><p>Cliquer ensuite sur <strong>Ajouter une fonctionnalité</strong>, patienter le temps du chargement des options disponibles, puis choisir 
+                            d'installer <strong>OpenSSH Client (Beta)</strong></p>                
+                            <img src="images/openSSH/ManageOptionalFeatures.PNG"  class="image" alt="gérer les fonctionnalités facultatives">
+                            <img src="images/openSSH/AddAFeature.PNG"  class="image" alt="ajouter une fonctionnalité">
+                        </li>
+                        <li>Pour finaliser l'installation, un redémarrage de l'ordinateur est nécessaire. Il sera alors possible de lancer un client OpenSSH directement depuis 
+                            l'invite de commandes Windows <br>
+                                <img src="images/openSSH/commandSSH.PNG"  class="image" alt="invite de commandes Windows">
+            
+                        </li>
+                    </ol>
+                </p>
+                
+                <div class="wrapper">
+                    <button class="button" id="homeButton">Home</button>
+                </div>
+            
+                <script src="scripts/home.js"></script>
+                <script src="scripts/top.js"></script>
+            </div>
+        </div>
+
+    </body>
+</html> 

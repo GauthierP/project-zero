@@ -1,0 +1,17 @@
+.d3svg{
+    display: block;
+    margin: auto;
+    }
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.zoom {
+cursor: move;
+fill: none;
+pointer-events: all;
+}
+

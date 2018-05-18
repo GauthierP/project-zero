@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+   
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="styles/style-main.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" href="images/icon.ico">
+
+    </head>
+
+    <body>
+        <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+        <div class="header">
+                <h1>Ceci sera un site web</h1>
+                <p>créé par <img src="images/profil.png" class="profil" alt="avatar"></p>
+        </div> 
+
+        
+        <div class="navbar">
+            <a href="index.html"><i class="fa fa-home"></i> Accueil</a>
+            <div class="dropdown">
+                <button class="dropbtn">Articles
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="open-ssh.html">Open SSH sur Windows 10 (FR)</a>
+                    <a href="teardown.html">Embrace teardown (EN)</a>
+
+                </div>
+            </div>
+            <a href="galerie.html">Galerie</a>
+            <a href="about.html" class="right">À propos</a>
+        </div>
+
+        
+        <div class="main"> 
+            <div class="content">
+                <div class="card">
+                    <h1><img src="images/icon.png" class="icon"> Bienvenue !</h1>
+                    <h5>16/05/2018</h5>
+                    <p>
+                        Après diverses discussions, je suis tombé sur la conclusion qu'il fallait franchir le cap et présenter le fruit de mon travail d'apprentissage du HTML, CSS et (un peu) javascript.
+                        Beaucoup d'efforts restent à faire, et probablement que les solutions adoptées ne sont pas les plus DRY (don't repeat yourself), mais je pense que cela viendra avec la pratique.
+                    </p>
+                    <p>À travers ces quelques pages, qui je l'espère tendront à s'étoffer, vous pourrez trouver toutes sortes de divagations dont l'unique vocation est de me donner de la matière pour pouvoir mettre en pratique et m'exercer. Le sujet n'est donc qu'une excuse.</p>
+                    <p>À noter que selon l'envie du moment et/ou l'inspiration et/ou le sujet, les articles pourront aussi bien être en français qu'en anglais.</p>                    
+                    <p>Je vous souhaite donc la bienvenue !</p>
+                </div>
+                <div class="card">
+                <h1><img src="images/icon.png" class="icon"> TODO</h1>
+                <h5>La date de l'article </h5>
+                <ul>
+                    <li>
+                        Faire une carte et un article sur "how to measure speed"
+                    </li>
+                </ul>
+                </div>
+
+                <div class="card">
+                    <a href="open-ssh.html"><h1><img src="images/icon.png" class="icon"> Installer OpenSSH sur Windows 10</h1></a>
+                    <h5>16/05/2018</h5>
+                    <p>Dans cet article, on découvre (en français) comment installer OpenSSH sur Windows 10, qui jusqu'à assez récemment était à la ramasse par rapport à Linux et MacOS.</p>
+                    <p>On en profite également pour digresser rapidement sur le chiffrement asymétrique et symétrique, puisque c'est un peu la base d'une connexion en SSH.</p>
+                    <p><a href="open-ssh.html">Lire la suite...</a></p>
+                </div>
+
+                <div class="card">
+                    <a href="teardown.html"><h1><img src="images/icon.png" class="icon"> Démontage (et remontage !) de l'Embrace d'Empatica</h1></a>
+                    <h5>16/05/2018</h5>
+                    <p>Dans cet article, je résume un peu le démontage que j'ai réalisé de l'Embrace d'Empatica, ce qui me permet également de mettre la main dans un peu de javascript pour afficher des images dans le style "slideshow".</p>                 
+                    <p><a href="teardown.html">Lire la suite...</a></p>
+                </div>
+                           
+                <script src="scripts/top.js"></script>              
+            </div>               
+        </div>
+    </body>
+</html> 

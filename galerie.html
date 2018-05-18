@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+   
+    <head>
+        <title>Home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="styles/style-main.css" rel="stylesheet" type="text/css">
+        <link href="styles/style-galerie.css" rel="stylesheet" type="text/css">
+        <link href="styles/style-slideshow.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="icon" href="images/icon.ico">
+
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        
+
+    </head>
+
+    <body>
+        <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+        <div class="header">
+                <h1>Gallery</h1>
+                <p>created by <img src="images/profil.png" class="profil" alt="avatar"></p>
+        </div> 
+
+        
+        <div class="navbar">
+            <a href="index.html"><i class="fa fa-home"></i> Accueil</a>
+            <div class="dropdown">
+                <button class="dropbtn">Articles
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                    <a href="open-ssh.html">Open SSH sur Windows 10 (FR)</a>
+                    <a href="teardown.html">Embrace teardown (EN)</a>
+
+                </div>
+            </div>
+            <a href="galerie.html">Galerie</a>
+            <a href="about.html" class="right">À propos</a>
+        </div>
+
+        
+        <div class="main"> 
+            <div class="content">
+                <div class="card">
+                    <p> In this section, you may find anything related to my hobbies, my work or my tentatives to learn HTML, javascript, CSS, D3.js, etc.</p>
+                </div>
+                <div class="card">
+                    <h1>What a hyping hype!</h1>
+                    <p>Darkest Dungeon's next DLC: The Color of Madness</p>
+                    <!-- Container for the image gallery -->
+                    <div class="slideshow container">
+                        <!-- Full-width images with number text -->
+                        <div class="mySlides">
+                        <div class="numbertext">1 / 2</div>
+                            <img src="images/gallery/colorOfMadness.jpg" class="slideImage" style="width:100%">
+                        </div>
+                    
+                        <div class="mySlides">
+                        <div class="numbertext">2 / 2</div>
+                            <img src="images/gallery/colorOfMadness2.jpg" class="slideImage" style="width:100%">
+                        </div>
+                            
+                        <!-- Next and previous buttons -->
+                        <a class="prev nothumb" onclick="plusDivs(-1, 0)">&#10094;</a>
+                        <a class="next nothumb" onclick="plusDivs(1, 0)">&#10095;</a>
+                    </div>
+                    <script src="scripts/slideshow.js"></script>
+                </div>
+
+                <div class="card">
+                    <h1> A nasty try to use D3.js to plot data</h1>
+                    <p>I consider it a complete failure, and I didn't even manage to put the script on an external .js file.So sad and disapointing..</p>
+                    <svg class="d3svg" width="700" height="500"></svg>     
+                    <script>
+                        var svg = d3.select("svg"),
+                            margin = {top: 20, right: 20, bottom: 110, left: 40},
+                            margin2 = {top: 430, right: 20, bottom: 30, left: 40},
+                            width = +svg.attr("width") - margin.left - margin.right,
+                            height = +svg.attr("height") - margin.top - margin.bottom,
+                            height2 = +svg.attr("height") - margin2.top - margin2.bottom;
+
+
+                        var parseTime = d3.timeParse("%d/%m/%Y %H:%M:%S.%L");
+
+                        var x = d3.scaleTime().range([0, width]),
+                            x2 = d3.scaleTime().range([0, width]),
+                            y = d3.scaleLinear().range([height, 0]),
+                            y2 = d3.scaleLinear().range([height2, 0]);
+
+                        var xAxis = d3.axisBottom(x),
+                            xAxis2 = d3.axisBottom(x2),
+                            yAxis = d3.axisLeft(y);
+
+                        var brush = d3.brushX()
+                            .extent([[0, 0], [width, height2]])
+                            .on("brush end", brushed);
+
+                        var zoom = d3.zoom()
+                            .scaleExtent([1, Infinity])
+                            .translateExtent([[0, 0], [width, height]])
+                            .extent([[0, 0], [width, height]])
+                            .on("zoom", zoomed);
+
+                        var line = d3.line()
+                            .x(function (d) { return x(d.Timestamp); })
+                            .y(function (d) { return y(d.ECG); });
+
+                        var line2 = d3.line()
+                            .x(function (d) { return x2(d.Timestamp); })
+                            .y(function (d) { return y2(d.ECG); });
+
+                        var clip = svg.append("defs").append("svg:clipPath")
+                            .attr("id", "clip")
+                            .append("svg:rect")
+                            .attr("width", width)
+                            .attr("height", height)
+                            .attr("x", 0)
+                            .attr("y", 0); 
+
+
+                        var Line_chart = svg.append("g")
+                            .attr("class", "focus")
+                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                            .attr("clip-path", "url(#clip)");
+
+
+                        var focus = svg.append("g")
+                            .attr("class", "focus")
+                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                        var context = svg.append("g")
+                            .attr("class", "context")
+                            .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+
+                        d3.csv("data/data.csv", type, function (error, data) {
+                            if (error) throw error;
+
+                            x.domain(d3.extent(data, function(d) { return d.Timestamp; }));
+                            y.domain([d3.min(data, function (d) { return d.ECG*(0.95); }), d3.max(data, function (d) { return d.ECG*(1.05);})]);
+                            x2.domain(x.domain());
+                            y2.domain(y.domain());
+
+
+                            focus.append("g")
+                                .attr("class", "axis axis--x")
+                                .attr("transform", "translate(0," + height + ")")
+                                .call(xAxis);
+
+                            focus.append("g")
+                                .attr("class", "axis axis--y")
+                                .call(yAxis);
+
+                            Line_chart.append("path")
+                                .datum(data)
+                                .attr("class", "line")
+                                .attr("d", line);
+
+                            context.append("path")
+                                .datum(data)
+                                .attr("class", "line")
+                                .attr("d", line2);
+
+
+                            context.append("g")
+                                .attr("class", "axis axis--x")
+                                .attr("transform", "translate(0," + height2 + ")")
+                                .call(xAxis2);
+
+                            context.append("g")
+                                .attr("class", "brush")
+                                .call(brush)
+                                .call(brush.move, x.range());
+
+                            svg.append("rect")
+                                .attr("class", "zoom")
+                                .attr("width", width)
+                                .attr("height", height)
+                                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                                .call(zoom);
+                        });
+
+                        function brushed() {
+                            if (d3.event.sourceEvent && d3.event.sourceEvent.type === "zoom") return; // ignore brush-by-zoom
+                            var s = d3.event.selection || x2.range();
+                            x.domain(s.map(x2.invert, x2));
+                            Line_chart.select(".line").attr("d", line);
+                            focus.select(".axis--x").call(xAxis);
+                            svg.select(".zoom").call(zoom.transform, d3.zoomIdentity
+                                .scale(width / (s[1] - s[0]))
+                                .translate(-s[0], 0));
+                        }
+
+                        function zoomed() {
+                            if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
+                            var t = d3.event.transform;
+                            x.domain(t.rescaleX(x2).domain());
+                            Line_chart.select(".line").attr("d", line);
+                            focus.select(".axis--x").call(xAxis);
+                            context.select(".brush").call(brush.move, x.range().map(t.invertX, t));
+                        }
+
+                        function type(d) {
+                            d.Timestamp = parseTime(d.Timestamp);
+                            d.ECG = +d.ECG;
+                            return d;
+                        }
+                    </script>       
+                </div>
+
+                
+
+            </div>             
+        </div>
+    </body>
+</html> 
