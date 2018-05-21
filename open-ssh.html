@@ -39,101 +39,98 @@
         
         <div class="main">
             <div class="content">
-                <h1>Installer openSSH sur Windows 10</h1>
+                <h1>How to install OpenSSH on Windows 10</h1>
                 <p> 
-                    Ce document a deux objectifs distincts : 
+                    This document has two distinct purposes:
                     <ol>
-                        <li>D'une façon indirecte, me permettre d'affiner et de mettre en pratique mes compétences en programmation web (HTML, CSS, JavaScript).</li>
-                        <li>Et, dans ce cas précis, permettre au lecteur d'installer openSSH sans avoir à passer par des applications tierces 
-                            telles que <a href="https://www.putty.org/" target="_blank">PuTTY</a>.</li>
+                        <li>In an indirect way, allow me to refine and put into practice my skills in web programming (HTML, CSS, JavaScript).</li>
+                        <li>And, in this case, allow the reader to use SSh on Windows 10 without having to go through third-party applications 
+                            such as <a href="https://www.putty.org/" target="_blank">PuTTY</a>.</li>
                     </ol>
                 </p>
                 <p>
-                    Il est rédigé en parallèle de mon apprentissage des technologies du web, que je réalise à l'aide d'un certain nombre de tutoriels et didacticiels, 
-                    notamment ceux de <a href="https://developer.mozilla.org/fr/docs/Web" target="_blank">Mozilla.org</a>.
+                    It is written in parallel with my learning of web technologies, which I realize using a number of tutorials and tutorials, 
+                    including those from <a href="https://developer.mozilla.org/fr/docs/Web" target="_blank">Mozilla.org</a>.
                 </p>
             
-                <h2>Contexte</h2>
-                <p>Le protocole SSH (Secure SHell) permet une connexion distante et sécurisée à un serveur. Jusqu'à très récemment, les utilisateurs de Windows devaient 
-                    passer par une application tierce comme PuTTY pour pouvoir établir une connexion en SSH, contrairement aux utilisateurs de MacOS ou Linux, qui peuvent 
-                    le lancer directement via la ligne de commande.</p>
+                <h2>Context</h2>
+                <p>The Secure SHell (SSH) protocol allows a remote and secure connection to a server. Until very recently, Windows users had to
+                    go through a third-party application like PuTTY to establish an SSH connection, unlike users of MacOS or Linux, which could
+                    launch it directly from the command line.</p>
             
-                <h3>Le chiffrement des échanges avec SSH</h3>
+                <h3>Exchanges encryption with SSH</h3>
                 <p>
-                    Sans rentrer dans les détails des algorithmes de chiffrement, ce qui n'est pas le sujet ici, on parlera tout de même de deux grandes catégories : les 
-                    chiffrements <em>symétriques</em> et <em>asymétriques</em>. Je recommande la lecture du didacticiel 
-                    <a href="https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/la-connexion-securisee-a-distance-avec-ssh" target="_blank">suivant</a>, sur lequel on 
-                    s'appuyera plus que largement dans ce paragraphe.    
+                    Without going into the details of encryption algorithms, which is not the subject here, we will talk about two major categories:
+                    ciphers <em>symmetric</em> and <em>asymmetric</em>. I recommend reading the following 
+                    <a href="https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/la-connexion-securisee-a-distance-avec-ssh" target="_blank">tutorial</a> 
+                    (in french), from which these paragraphs are largely inspired.
                 </p>
-                <h4>Le chiffrement symétrique</h4>
-                <P>Le chiffrement symétrique est la méthode de chiffrement la plus simple. Avec cette méthode, on utilise la même clé pour chiffrer et déchiffrer un message.
-                    Il faut donc que la personne qui chiffre et celle qui déchiffre connaissent toutes les deux la clé.
+                <h4>Symmetric encryption</h4>
+                <P>Symmetric encryption is the simplest method of encryption. With this method, the same key is used to encrypt and decrypt a message.
+                    It is therefore necessary that the person who encrypts and the one who decrypts both know the key.
                 </P>
-                <p>La difficulté de ce schéma est de trouver un moyen de s'échanger la clé. Elle ne peut en effet pas être échangée en clair, car une personne interceptant la clé pourrait 
-                    alors déchiffrer tous les messages suivant. La solution pour contourner cette impasse est de chiffrer la clé de chiffrement lors de son envoi. On arrive alors à la méthode 
-                    du chiffrement asymétrique.
-                <h4>Le chiffrement asymétrique</h4>
-                <P>Le chiffrement asymétrique utilise une clé pour chiffrer et une autre pour déchiffrer.</P>
-                <P>Il y a donc deux clés:</P>
+                <p>The difficulty of this scheme is to find a way to exchange the key. It cannot be exchanged in clear, because a person intercepting the key could
+                    then decipher all the following messages. The solution to work around this dead end is to encrypt the encryption key when it is sent. 
+                    Then we come to the method of asymmetric encryption.</p>
+                <h4>Asymmetric encryption</h4>
+                <P>Asymmetric encryption uses one key to encrypt and another to decrypt.</P>
+                <P>There are two keys:</P>
                 <ul>
-                    <li>une clé dite "<strong>publique</strong>" qui sert à <strong>chiffrer.</strong></li>
-                    <li>une clé dite "<strong>privée</strong>" qui sert à <strong>déchiffrer.</strong></li>
+                    <li>A "<strong>public</strong>" key used to <strong>encrypt the message.</strong></li>
+                    <li>A "<strong>private</strong>" key used to <strong>decrypt the message.</strong></li>
                 </ul>
+                <p>The public key is only used to encrypt. With this type of algorithm, we can decipher a message only if we know the private key.</p>
                 <p>
-                    La clé publique ne sert qu'à chiffrer. Avec ce type d'algorithme, on ne peut déchiffrer un message que si l'on connait la clé privée.
+                    At first, the computer is asked to generate a pair of keys: one private and one public.
+                    The public key is sent to the other machine wishing to communicate with the computer, so that it can encrypt its messages using the public key. 
+                    The private key is kept secret by the computer to be able to decipher all the encrypted messages with the public key that it will receive 
+                    from the other computer.
                 </p>
-                <p>
-                    Dans un premier temps, on demande à l'ordinateur de générer une paire de clés : une privée et une publique.
-                    La clé publique est envoyée à l'autre machine souhaitant communiquer avec l'ordinateur, pour que celle-ci puisse chiffrer ses messages à l'aide de la clé publique. La clé privée
-                    est gardé secrète par l'ordinateur pour pouvoir déchiffrer tous les messages chiffrés avec la clé publique qu'il recevra de l'autre ordinateur.
-                </p>
-                <P>On dit donc que ce chiffrement est asymétrique car il faut deux clés différentes. L'une permet de chiffrer le message, l'autre de le déchiffrer.</P>
-                <P>La clé publique peut être transmise en clair sur le réseau, ce n'est pas grave si un pirate l'intercepte, puisqu'elle ne sert qu'à chiffrer (et non déchiffrer). En revanche
-                    la clé privée qui permet de déchiffrer doit rester secrète.
+                <P>So we say that this encryption is asymmetrical because you need two different keys. One encrypts the message, another decrypts it.</P>
+                <P>The public key can be transmitted in clear on the network. It does not matter if a hacker intercepts it, since it only serves to encrypt (not decrypt). 
+                    On the other hand the private key that makes it possible to decipher must remain secret.
                 </P>
-                <p>L'algorithme de chiffrement asymétrique le plus connu s'appelle RSA (pour Rivest, Shamir et Adleman, du noms  de ses trois inventeurs). </p>
+                <p>The best-known asymmetric encryption algorithm is called RSA (for Rivest, Shamir, and Adleman, from the names of its three inventors).</p>
             
-                <h4>Dans le cas du SSH</h4>
+                <h4>In the case of SSH</h4>
                 <P>
-                    SSH utilise les deux chiffrements: asymétrique et symétrique. Cela fonctionne dans cet ordre :
+                    SSH uses both ciphers: asymmetrical and symmetric. It works in this order:
                 </P>
                 <ol>
-                    <li>Les deux machines souhaitant communiquer utilisent d'abord le chiffrement asymétrique pour s'échanger une clé de chiffrement symétrique.</li>
-                    <li>Pour le reste des échanges, le chiffrement symétrique est utilisé.</li>
+                    <li>The two machines wishing to communicate first use asymmetric encryption to exchange a symmetric encryption key.</li>
+                    <li>For all the following exchanges, the symmetric encryption is used.</li>
                 </ol>
-                <P>
-                    Cette méthode de double chiffrement est utilisée car le chiffrement asymétrique a un défaut : il demande beaucoup trop de ressources au processeur. Le chiffrement asymétrique est 100 
-                    à 1000 fois plus lent que le chiffrement symétrique. <br>
-                    <strong>Le chiffrement asymétrique est donc utilisé seulement au début de la communication</strong>, afin que les machines s'échangent la clé de chiffrement symétrique de manière 
-                    sécurisée.
+                <P><strong>Asymmetric encryption is used only at the beginning of the communication</strong>, so that the machines can exchange in a secure way 
+                    the symmetric encryption key.
+                    <br>
+                    This double encryption method is used because asymmetric encryption has a flaw: it requires far too much resources from the processor. 
+                    Asymmetric encryption is 100 to 1000 times slower than symmetric encryption.
                 </P>
-                <P>On a donc la procédure suivante:</P>
+                <P>To summarize, we have the following procedure:</P>
                 <ol>
-                    <li>La première machine génère une clé publique et une clé privée (chiffrement asymétrique).</li>
-                    <li>La clé publique est envoyée à l'autre machine.</li>
-                    <li>Cette autre machine génére une clé symétrique, la chiffre au moyen de la clé publique puis l'envoi à la première machine.</li>
-                    <li>La première machine déchiffre le message avec sa clé privée et obtient donc la clé de chiffrement symétrique.</li>
-                    <li>Tous les échanges suivants entre les deux machines se font à laide de la clé de chiffrement symétrique qu'elles se sont échangée.</li>
+                    <li>The first machine generates a public key and a private key (asymmetric encryption).</li>
+                    <li>The public key is sent to the other machine.</li>
+                    <li>This other machine generates a symmetric key, encrypts it with the public key received and sends it to the first machine.</li>
+                    <li>The first machine decrypts the message with its private key and thus obtains the symmetric encryption key.</li>
+                    <li>All subsequent exchanges between the two machines are done using the symmetric key encryption they both have.</li>
                 </ol>
-                <h2>Installer OpenSSH sur Windows 10</h2>
+                <h2>How to install OpenSSH on Windows 10</h2>
                 <p>
                     <ol>
-                        <li>Se rendre dans les paramètres de Windows, et plus spécifiquement dans la section <strong>"Applications" </strong><br>
-                            <img src="images/openSSH/parametresWindows.PNG"  class="image" alt="paramètres Windows 10">
+                        <li><p>Head to the Windows Parameters, and click on the <strong>"Applications"</strong> section </p>
+                            <img src="images/openSSH/parametresWindows.PNG"  class="image" alt="Windows 10 parameters">
                         </li>
-                        <li>Dans la section <strong>"Applications et fonctionnalités"</strong>, cliquer sur <strong>"Gérer les fonctionnalités facultatives"</strong> pour 
-                            accéder au panneau des fonctionnalités optionnelles <br>
-                            <img src="images/openSSH/appsAndFeatures.PNG"  class="image" alt="applications et fonctionnalités">
+                        <li><p>In <strong>"Apps & features"</strong>, click <strong>"Manage optional features"</strong> to access the optional features pannel</p>
+                            <img src="images/openSSH/appsAndFeatures.PNG"  class="image" alt="Apps and features">
                         </li>
-                        <li><p>Cliquer ensuite sur <strong>Ajouter une fonctionnalité</strong>, patienter le temps du chargement des options disponibles, puis choisir 
-                            d'installer <strong>OpenSSH Client (Beta)</strong></p>                
+                        <li><p>Click <strong>Add a feature</strong>, give time for the available options to load, then choose to install 
+                            <strong>OpenSSH Client (Beta)</strong></p>                
                             <img src="images/openSSH/ManageOptionalFeatures.PNG"  class="image" alt="gérer les fonctionnalités facultatives">
-                            <img src="images/openSSH/AddAFeature.PNG"  class="image" alt="ajouter une fonctionnalité">
+                            <img src="images/openSSH/AddAFeature.PNG"  class="image" alt="add a feature">
                         </li>
-                        <li>Pour finaliser l'installation, un redémarrage de l'ordinateur est nécessaire. Il sera alors possible de lancer un client OpenSSH directement depuis 
-                            l'invite de commandes Windows <br>
-                                <img src="images/openSSH/commandSSH.PNG"  class="image" alt="invite de commandes Windows">
-            
+                        <li><p>To complete the installation, a restart of the computer is necessary. It will then be possible to launch an OpenSSH client directly from
+                            the Windows command prompt</p>
+                            <img src="images/openSSH/commandSSH.PNG"  class="image" alt="Windows prompt">       
                         </li>
                     </ol>
                 </p>
