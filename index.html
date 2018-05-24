@@ -1,82 +1,107 @@
 <!DOCTYPE html>
-
 <html lang="en">
-   
+
     <head>
-        <title>Home</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="styles/style-main.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="icon" href="images/icon.ico">
+    <title>Web Project Zero - Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/style-index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="icon" href="images/icon.ico">
 
     </head>
 
     <body>
         <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
 
-        <div class="header">
-                <h1>Web Project Zero</h1>
-                <p>created by <img src="images/profil.png" class="profil" alt="avatar"></p>
-        </div> 
-
-        
-        <div class="navbar">
-            <a href="index.html"><i class="fa fa-home"></i> Home</a>
-            <div class="dropdown">
-                <button class="dropbtn">Articles
-                    <i class="fa fa-caret-down"></i>
-                </button>
-                <div class="dropdown-content">
-                    <a href="open-ssh.html">Open SSH on Windows 10</a>
-                    <a href="teardown.html">Embrace teardown</a>
-                    <a href="how-to-measure-speed.html">How to measure a speed</a>
-                    <a href="review-darkestdungeon.html">Review - Darkest Dungeon</a>
-                    <a href="review-battlechasers.html">Review - Battle Chaser: Nightwar </a>
-
-                </div>
-            </div>
-            <a href="galerie.html">Gallery</a>
-            <a href="404.html">Dead end</a>
-            <a href="about.html" class="right">About</a>
+        <div class="jumbotron text-center header" style="margin-bottom:0">
+                <h2>Web Project Zero</h2>
+                <h4>created by <img src="images/profil.png" class="profil" alt="avatar"></h4>
         </div>
-      
-        <div class="main"> 
-            <div class="content">
+
+        <nav class="navbar navbar-inverse" style="margin-bottom:0">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Articles <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="open-ssh.html">Open SSH on Windows 10</a></li>
+                        <li><a href="teardown.html">Embrace teardown</a></li>
+                        <li><a href="how-to-measure-speed.html">How to measure a speed</a></li>
+                        <li><a href="review-darkestdungeon.html">Review - Darkest Dungeon</a></li>
+                        <li><a href="review-battlechasers.html">Review - Battle Chaser: Nightwar </a></li>
+                    </ul>
+                </li>
+                <li><a href="galerie.html">Gallery</a></li>
+                <li><a href="404.html">Dead end</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="about.html">About & Contact</a></li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+
+
+        <div class="container">
+            <div class="row content">
+                <div class="col-sm-1"></div>
+
+                <div class="col-sm-10">
                     <div class="card">
-                        <a href="how-to-measure-speed.html"><h1><img src="images/icon.png" class="icon"> How to measure a speed?</h1></a>
-                        <h5>18/05/2018</h5>
+                        <a href="how-to-measure-speed.html"><h3><img src="images/icon.png" class="icon"> <strong>How to measure a speed?</strong></h3></a>
+                        <h5><strong>18/05/2018</strong></h5>
                         <p>This article follows a question I was asked... And a lack of enough different solutions made me think about the subject again and again, until I decided to dig a little bit more about it.  </p>
                         <p><a href="how-to-measure-speed.html">Read more...</a></p>
                     </div>
-                <div class="card">
-                    <h1><img src="images/icon.png" class="icon"> Welcome!</h1>
-                    <h5>16/05/2018</h5>
-                    <p>
+                    <div class="card">
+                        <h3 ><img src="images/icon.png" class="icon img-responsive"><strong> Welcome!</strong></h3>
+                        <h5><strong>16/05/2018</strong></h5>
+                        <p>
                             After various discussions, I came to the conclusion that I had to present the fruit of my work learning HTML, CSS and (a little of) javascript.
-                            Many work remains to be done, and probably the solutions adopted are not the most DRY (do not repeat yourself), but I think that will come with practice.
-                    </p>
-                    <p>Through these few pages, which I hope will tend to expand, you can find all kinds of ramblings whose sole purpose are to give me the material to be able to practice. The subject is therefore only an excuse.</p>                 
-                    <p>I wish you a warm welcome!</p>
+                            Many work remains to be done, and probably the solutions adopted are not the most DRY (do not repeat yourself), but I think that will come 
+                            with practice.
+                        </p>
+                        <p>Through these few pages, which I hope will tend to expand, you can find all kinds of ramblings whose sole purpose are to give me the material 
+                            to be able to practice. The subject is therefore only an excuse.
+                        </p>                 
+                        <p>I wish you a warm welcome!</p>
+                    </div>
+    
+                    <div class="card">
+                        <a href="open-ssh.html"><h3><img src="images/icon.png" class="icon img-responsive"><strong> Install OpenSSH on Windows 10</strong></h3></a>
+                        <h5><strong>16/05/2018</strong></h5>
+                        <p>In this article, we discover how to install OpenSSH on Windows 10, which until recently was the pick up compared to Linux and MacOS.</p>
+                        <p>We also take the opportunity to quickly digress on asymmetric and symmetric encryption, since it is the backbone of SSH connection.</p>
+                        <p><a href="open-ssh.html">Read more...</a></p>
+                    </div>
+    
+                    <div class="card">
+                        <a href="teardown.html"><h3><img src="images/icon.png" class="icon img-responsive"><strong> Teardown (and repair!) of the Embrace from Empatica</strong></h3></a>
+                        <h5><strong>16/05/2018</strong></h5>
+                        <p>In this article, I summarize the teardown I made about the Embrace from Empatica, which also allows me to put my hands in a little javascript to display images in the style "slideshow".</p>                 
+                        <p><a href="teardown.html">Read more...</a></p>
+                    </div>
                 </div>
-
-                <div class="card">
-                    <a href="open-ssh.html"><h1><img src="images/icon.png" class="icon"> Install OpenSSH on Windows 10</h1></a>
-                    <h5>16/05/2018</h5>
-                    <p>In this article, we discover how to install OpenSSH on Windows 10, which until recently was the pick up compared to Linux and MacOS.</p>
-                    <p>We also take the opportunity to quickly digress on asymmetric and symmetric encryption, since it is the backbone of SSH connection.</p>
-                    <p><a href="open-ssh.html">Read more...</a></p>
-                </div>
-
-                <div class="card">
-                    <a href="teardown.html"><h1><img src="images/icon.png" class="icon"> Teardown (and repair!) of the Embrace from Empatica</h1></a>
-                    <h5>16/05/2018</h5>
-                    <p>In this article, I summarize the teardown I made about the Embrace from Empatica, which also allows me to put my hands in a little javascript to display images in the style "slideshow".</p>                 
-                    <p><a href="teardown.html">Read more...</a></p>
-                </div>
-                           
-                <script src="scripts/top.js"></script>              
-            </div>               
+                
+                <div class="col-sm-1"></div>
+            </div>
         </div>
+        <script src="scripts/top.js"></script>
     </body>
-</html> 
+</html>

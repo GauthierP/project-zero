@@ -1,150 +1,183 @@
 <!DOCTYPE html>
-
 <html lang="en">
-   
+
     <head>
-        <title>SSH and Windows 10</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="styles/style-main.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="icon" href="images/icon.ico">
+    <title>WPZ - OpenSSH</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/style-index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="icon" href="images/icon.ico">
+
     </head>
 
     <body>
         <button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
 
-        <div class="header">
-                <h1>How to install OpenSSH on Windows 10</h1>
-                <p>créé par <img src="images/profil.png" class="profil" alt="avatar"></p>
-        </div> 
-
-        
-    <div class="navbar">
-        <a href="index.html"><i class="fa fa-home"></i> Home</a>
-        <div class="dropdown">
-            <button class="dropbtn">Articles
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-                <a href="open-ssh.html">Open SSH on Windows 10</a>
-                <a href="teardown.html">Embrace teardown</a>
-                <a href="how-to-measure-speed.html">How to measure a speed</a>
-                <a href="review-darkestdungeon.html">Review - Darkest Dungeon</a>
-                <a href="review-battlechasers.html">Review - Battle Chaser: Nightwar </a>
-            </div>
+        <div class="jumbotron text-center header" style="margin-bottom:0">
+                <h2>Web Project Zero</h2>
+                <h4>created by <img src="images/profil.png" class="profil" alt="avatar"></h4>
         </div>
-        <a href="galerie.html">Gallery</a>
-        <a href="about.html" class="right">About</a>
-    </div>
 
-        
-        <div class="main">
-            <div class="content">
-                <h1>How to install OpenSSH on Windows 10</h1>
-                <p> 
-                    This document has two distinct purposes:
-                    <ol>
-                        <li>In an indirect way, allow me to refine and put into practice my skills in web programming (HTML, CSS, JavaScript).</li>
-                        <li>And, in this case, allow the reader to use SSh on Windows 10 without having to go through third-party applications 
-                            such as <a href="https://www.putty.org/" target="_blank">PuTTY</a>.</li>
-                    </ol>
-                </p>
-                <p>
-                    It is written in parallel with my learning of web technologies, which I realize using a number of tutorials and tutorials, 
-                    including those from <a href="https://developer.mozilla.org/fr/docs/Web" target="_blank">Mozilla.org</a>.
-                </p>
-            
-                <h2>Context</h2>
-                <p>The Secure SHell (SSH) protocol allows a remote and secure connection to a server. Until very recently, Windows users had to
-                    go through a third-party application like PuTTY to establish an SSH connection, unlike users of MacOS or Linux, which could
-                    launch it directly from the command line.</p>
-            
-                <h3>Exchanges encryption with SSH</h3>
-                <p>
-                    Without going into the details of encryption algorithms, which is not the subject here, we will talk about two major categories:
-                    ciphers <em>symmetric</em> and <em>asymmetric</em>. I recommend reading the following 
-                    <a href="https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/la-connexion-securisee-a-distance-avec-ssh" target="_blank">tutorial</a> 
-                    (in french), from which these paragraphs are largely inspired.
-                </p>
-                <h4>Symmetric encryption</h4>
-                <P>Symmetric encryption is the simplest method of encryption. With this method, the same key is used to encrypt and decrypt a message.
-                    It is therefore necessary that the person who encrypts and the one who decrypts both know the key.
-                </P>
-                <p>The difficulty of this scheme is to find a way to exchange the key. It cannot be exchanged in clear, because a person intercepting the key could
-                    then decipher all the following messages. The solution to work around this dead end is to encrypt the encryption key when it is sent. 
-                    Then we come to the method of asymmetric encryption.</p>
-                <h4>Asymmetric encryption</h4>
-                <P>Asymmetric encryption uses one key to encrypt and another to decrypt.</P>
-                <P>There are two keys:</P>
-                <ul>
-                    <li>A "<strong>public</strong>" key used to <strong>encrypt the message.</strong></li>
-                    <li>A "<strong>private</strong>" key used to <strong>decrypt the message.</strong></li>
+        <nav class="navbar navbar-inverse" style="margin-bottom:0">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
+                <li class="dropdown active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Articles <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active"> <a href="open-ssh.html">Open SSH on Windows 10</a></li>
+                        <li><a href="teardown.html">Embrace teardown</a></li>
+                        <li><a href="how-to-measure-speed.html">How to measure a speed</a></li>
+                        <li><a href="review-darkestdungeon.html">Review - Darkest Dungeon</a></li>
+                        <li><a href="review-battlechasers.html">Review - Battle Chaser: Nightwar </a></li>
+                    </ul>
+                </li>
+                <li><a href="galerie.html">Gallery</a></li>
+                <li><a href="404.html">Dead end</a></li>
                 </ul>
-                <p>The public key is only used to encrypt. With this type of algorithm, we can decipher a message only if we know the private key.</p>
-                <p>
-                    At first, the computer is asked to generate a pair of keys: one private and one public.
-                    The public key is sent to the other machine wishing to communicate with the computer, so that it can encrypt its messages using the public key. 
-                    The private key is kept secret by the computer to be able to decipher all the encrypted messages with the public key that it will receive 
-                    from the other computer.
-                </p>
-                <P>So we say that this encryption is asymmetrical because you need two different keys. One encrypts the message, another decrypts it.</P>
-                <P>The public key can be transmitted in clear on the network. It does not matter if a hacker intercepts it, since it only serves to encrypt (not decrypt). 
-                    On the other hand the private key that makes it possible to decipher must remain secret.
-                </P>
-                <p>The best-known asymmetric encryption algorithm is called RSA (for Rivest, Shamir, and Adleman, from the names of its three inventors).</p>
-            
-                <h4>In the case of SSH</h4>
-                <P>
-                    SSH uses both ciphers: asymmetrical and symmetric. It works in this order:
-                </P>
-                <ol>
-                    <li>The two machines wishing to communicate first use asymmetric encryption to exchange a symmetric encryption key.</li>
-                    <li>For all the following exchanges, the symmetric encryption is used.</li>
-                </ol>
-                <P><strong>Asymmetric encryption is used only at the beginning of the communication</strong>, so that the machines can exchange in a secure way 
-                    the symmetric encryption key.
-                    <br>
-                    This double encryption method is used because asymmetric encryption has a flaw: it requires far too much resources from the processor. 
-                    Asymmetric encryption is 100 to 1000 times slower than symmetric encryption.
-                </P>
-                <P>To summarize, we have the following procedure:</P>
-                <ol>
-                    <li>The first machine generates a public key and a private key (asymmetric encryption).</li>
-                    <li>The public key is sent to the other machine.</li>
-                    <li>This other machine generates a symmetric key, encrypts it with the public key received and sends it to the first machine.</li>
-                    <li>The first machine decrypts the message with its private key and thus obtains the symmetric encryption key.</li>
-                    <li>All subsequent exchanges between the two machines are done using the symmetric key encryption they both have.</li>
-                </ol>
-                <h2>How to install OpenSSH on Windows 10</h2>
-                <p>
-                    <ol>
-                        <li><p>Head to the Windows Parameters, and click on the <strong>"Applications"</strong> section </p>
-                            <img src="images/openSSH/parametresWindows.PNG"  class="image" alt="Windows 10 parameters">
-                        </li>
-                        <li><p>In <strong>"Apps & features"</strong>, click <strong>"Manage optional features"</strong> to access the optional features pannel</p>
-                            <img src="images/openSSH/appsAndFeatures.PNG"  class="image" alt="Apps and features">
-                        </li>
-                        <li><p>Click <strong>Add a feature</strong>, give time for the available options to load, then choose to install 
-                            <strong>OpenSSH Client (Beta)</strong></p>                
-                            <img src="images/openSSH/ManageOptionalFeatures.PNG"  class="image" alt="gérer les fonctionnalités facultatives">
-                            <img src="images/openSSH/AddAFeature.PNG"  class="image" alt="add a feature">
-                        </li>
-                        <li><p>To complete the installation, a restart of the computer is necessary. It will then be possible to launch an OpenSSH client directly from
-                            the Windows command prompt</p>
-                            <img src="images/openSSH/commandSSH.PNG"  class="image" alt="Windows prompt">       
-                        </li>
-                    </ol>
-                </p>
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="about.html">About & Contact</a></li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+
+
+        <div class="container">
+            <div class="row content">
+                <div class="col-sm-1"></div>
+
+                <div class="col-sm-10">
+                    <h2>How to install OpenSSH on Windows 10</h2>
+                    <p> 
+                        This document has two distinct purposes:
+                        <ol>
+                            <li>In an indirect way, allow me to refine and put into practice my skills in web programming (HTML, CSS, JavaScript).</li>
+                            <li>And, in this case, allow the reader to use SSh on Windows 10 without having to go through third-party applications 
+                                such as <a href="https://www.putty.org/" target="_blank">PuTTY</a>.</li>
+                        </ol>
+                    </p>
+                    <p>
+                        It is written in parallel with my learning of web technologies, which I realize using a number of tutorials and tutorials, 
+                        including those from <a href="https://developer.mozilla.org/fr/docs/Web" target="_blank">Mozilla.org</a>.
+                    </p>
                 
-                <div class="wrapper">
-                    <button class="button" id="homeButton">Home</button>
+                    <h3>Context</h3>
+                    <p>The Secure SHell (SSH) protocol allows a remote and secure connection to a server. Until very recently, Windows users had to
+                        go through a third-party application like PuTTY to establish an SSH connection, unlike users of MacOS or Linux, which could
+                        launch it directly from the command line.</p>
+                    
+                    <h3>Exchanges encryption with SSH</h3>
+                    <p>
+                        Without going into the details of encryption algorithms, which is not the subject here, we will talk about two major categories:
+                        ciphers <em>symmetric</em> and <em>asymmetric</em>. I recommend reading the following 
+                        <a href="https://openclassrooms.com/courses/reprenez-le-controle-a-l-aide-de-linux/la-connexion-securisee-a-distance-avec-ssh" target="_blank">tutorial</a> 
+                        (in french), from which these paragraphs are largely inspired.
+                    </p>
+                    <h4>Symmetric encryption</h4>
+                    <P>Symmetric encryption is the simplest method of encryption. With this method, the same key is used to encrypt and decrypt a message.
+                        It is therefore necessary that the person who encrypts and the one who decrypts both know the key.
+                    </P>
+                    <p>The difficulty of this scheme is to find a way to exchange the key. It cannot be exchanged in clear, because a person intercepting the key could
+                        then decipher all the following messages. The solution to work around this dead end is to encrypt the encryption key when it is sent. 
+                        Then we come to the method of asymmetric encryption.</p>
+                    <h4>Asymmetric encryption</h4>
+                    <P>Asymmetric encryption uses one key to encrypt and another to decrypt.</P>
+                    <P>There are two keys:</P>
+                    <ul>
+                        <li>A "<strong>public</strong>" key used to <strong>encrypt the message.</strong></li>
+                        <li>A "<strong>private</strong>" key used to <strong>decrypt the message.</strong></li>
+                    </ul>
+                    <p>The public key is only used to encrypt. With this type of algorithm, we can decipher a message only if we know the private key.</p>
+                    <p>
+                        At first, the computer is asked to generate a pair of keys: one private and one public.
+                        The public key is sent to the other machine wishing to communicate with the computer, so that it can encrypt its messages using the public key. 
+                        The private key is kept secret by the computer to be able to decipher all the encrypted messages with the public key that it will receive 
+                        from the other computer.
+                    </p>
+                    <P>So we say that this encryption is asymmetrical because you need two different keys. One encrypts the message, another decrypts it.</P>
+                    <P>The public key can be transmitted in clear on the network. It does not matter if a hacker intercepts it, since it only serves to encrypt (not decrypt). 
+                        On the other hand the private key that makes it possible to decipher must remain secret.
+                    </P>
+                    <p>The best-known asymmetric encryption algorithm is called RSA (for Rivest, Shamir, and Adleman, from the names of its three inventors).</p>
+                
+                    <h4>In the case of SSH</h4>
+                    <P>
+                        SSH uses both ciphers: asymmetrical and symmetric. It works in this order:
+                    </P>
+                    <ol>
+                        <li>The two machines wishing to communicate first use asymmetric encryption to exchange a symmetric encryption key.</li>
+                        <li>For all the following exchanges, the symmetric encryption is used.</li>
+                    </ol>
+                    <P><strong>Asymmetric encryption is used only at the beginning of the communication</strong>, so that the machines can exchange in a secure way 
+                        the symmetric encryption key.
+                        <br>
+                        This double encryption method is used because asymmetric encryption has a flaw: it requires far too much resources from the processor. 
+                        Asymmetric encryption is 100 to 1000 times slower than symmetric encryption.
+                    </P>
+                    <P>To summarize, we have the following procedure:</P>
+                    <ol>
+                        <li>The first machine generates a public key and a private key (asymmetric encryption).</li>
+                        <li>The public key is sent to the other machine.</li>
+                        <li>This other machine generates a symmetric key, encrypts it with the public key received and sends it to the first machine.</li>
+                        <li>The first machine decrypts the message with its private key and thus obtains the symmetric encryption key.</li>
+                        <li>All subsequent exchanges between the two machines are done using the symmetric key encryption they both have.</li>
+                    </ol>
+                    <h2>How to install OpenSSH on Windows 10</h2>
+                    <p>
+                        <ol>
+                            <li><p>Head to the Windows Parameters, and click on the <strong>"Applications"</strong> section </p>
+                                <br>
+                                <img src="images/openSSH/parametresWindows.PNG"  class="image img-responsive img-rounded" style="width:60%" alt="Windows 10 parameters">
+                                <br>
+                            </li>
+                            <li><p>In <strong>"Apps & features"</strong>, click <strong>"Manage optional features"</strong> to access the optional features pannel</p>
+                                <br>
+                                <img src="images/openSSH/appsAndFeatures.PNG"  class="image img-responsive img-rounded" style="width: 60%" alt="Apps and features">
+                                <br>
+                            </li>
+                            <li><p>Click <strong>Add a feature</strong>, give time for the available options to load, then choose to install 
+                                <strong>OpenSSH Client (Beta)</strong></p> 
+                                <br>               
+                                <img src="images/openSSH/ManageOptionalFeatures.PNG" class="image img-responsive img-rounded" style="width:60%" alt="gérer les fonctionnalités facultatives">
+                                <br>
+                                <img src="images/openSSH/AddAFeature.PNG"  class="image img-responsive img-rounded" style="width:60%" alt="add a feature">
+                                <br>
+                            </li>
+                            <li><p>To complete the installation, a restart of the computer is necessary. It will then be possible to launch an OpenSSH client directly from
+                                the Windows command prompt</p>
+                                <br>
+                                <img src="images/openSSH/commandSSH.PNG"  class="image img-responsive img-rounded" style="width:70%" alt="Windows prompt">       
+                                <br>
+                            </li>
+                        </ol>
+                    </p>
+                    
+                    <div class="wrapper">
+                        <a href="index.html"><button type="button" class="btn btn-primary btn-lg btn-responsive"><i class="fa fa-home"></i> Home</button></a>
+                    </div>  
+                    <script src="scripts/top.js"></script>
+                    
                 </div>
-            
-                <script src="scripts/home.js"></script>
-                <script src="scripts/top.js"></script>
+                
+                <div class="col-sm-1"></div>
             </div>
         </div>
-
+        <script src="scripts/top.js"></script>
     </body>
-</html> 
+</html>

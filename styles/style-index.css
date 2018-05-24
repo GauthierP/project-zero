@@ -1,0 +1,139 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, rgb(45, 162, 168), rgb(42, 185, 192));
+    margin: 0 auto;   
+    
+}
+
+body, h1, h2, h3, h4, h5{
+    font-size: 1.3vw;
+}
+
+.profil{ 
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+}
+
+h2, h3, h4{
+    color: rgb(44, 123, 127);
+    font-weight: bold;
+
+}
+
+.header{
+    background: rgb(44, 123, 127);
+    background-image: url(../images/zen.png);
+    background-size: cover;
+    color: white;
+}
+
+.header h2, .header h4{
+    color:white;
+}
+
+.header {
+    font-size: 10em;
+}
+
+/* Manage links */
+a{
+    color: rgb(44, 123, 127); 
+    text-decoration: none;
+    text-decoration-line: none;
+}
+a:hover{
+    color: rgb(44, 123, 127);
+    text-decoration: none;
+    text-decoration-line: none;
+}
+a:visited{
+    color: rgb(44, 123, 127);
+    text-decoration: none;
+    text-decoration-line: none;
+}
+
+
+.profil{ 
+    vertical-align: middle;
+    height: 50px;
+    width: 50px;
+}
+
+.icon{
+    width: 5%;
+    height: 5%;
+    display: inline;
+    vertical-align: middle;
+}
+
+
+.col-sm-10 {
+    background-color: rgb(222, 232, 233);
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+
+
+.image{
+    display: block;
+    margin: auto;
+}
+
+
+#topBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: rgba(222, 232, 233, 0.5); /* Set a background color */
+    color: black; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none;
+    color:rgb(44, 123, 127);
+}
+
+
+.wrapper{
+    margin: auto;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.btn-lg, .btn-lg:focus, .btn-lg:hover, .btn-lg:active, .btn-lg:active:focus{
+    background-color: rgb(44, 123, 127);
+    color: white;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .btn-responsive {
+      padding:4px 8px;
+      font-size:80%;
+      line-height: 1;
+      border-radius:3px;
+    }
+  }
+  
+@media (min-width: 769px) and (max-width: 992px) {
+.btn-responsive {
+    padding:6px 10px;
+    font-size:90%;
+    line-height: 1.2;
+}
+}
