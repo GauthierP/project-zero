@@ -2,10 +2,6 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     background: linear-gradient(to right, rgb(45, 162, 168), rgb(42, 185, 192));
     margin: 0 auto;   
-    
-}
-
-body, h1, h2, h3, h4, h5{
     font-size: 1.6rem;
 }
 
@@ -15,10 +11,10 @@ body, h1, h2, h3, h4, h5{
     width: 50px;
 }
 
-h2, h3, h4{
+h1, h2, h3, h4, h5{
     color: rgb(44, 123, 127);
     font-weight: bold;
-
+    font-size: 2rem;
 }
 
 .header{
@@ -28,13 +24,15 @@ h2, h3, h4{
     color: white;
 }
 
-.header h2, .header h4{
+.header h2{
+    color:white;
+    font-size: 3rem;
+}
+
+.header h4{
     color:white;
 }
 
-.header {
-    font-size: 10em;
-}
 
 /* Manage links */
 a{
